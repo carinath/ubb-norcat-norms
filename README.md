@@ -1,2 +1,2 @@
-# Medieverkstedet's Normalization Rules for Cataloging Workflows in Alma
+# Normalization Rules for Cataloging Workflows in Ex Libris Alma
 
