@@ -14,7 +14,10 @@ For Norwegian libraries in the BIBSYS-consortia, the norms can easily be used on
 2. Open split mode in MDE, with the bibliographic record on the one side, choose Rules for the second window and search "UBB-hylleklare bøker". This will enable you to preview the changes before applying the norms. **(Important! Do NOT change the code directly in "UBB-hylleklare bøker"**
 
 For libraries outside the consortia it is possible to copy the latest version from [versions](https://github.com/carinath/ubb-norcat-norms/tree/main/versions). Feel free to save a local copy and modify as needed :-)
- 
+
+ ## Need help?
+
+ For technical issues see [Ex Libris' site](https://knowledge.exlibrisgroup.com/Alma/Product_Documentation/010Alma_Online_Help_(English)/Metadata_Management/016Working_with_Rules/020Working_with_Normalization_Rules). Ideas or need an update in the  version available in the the BIBSYS-consortia network? Contact [Carina](https://www.uib.no/personer/Carina.Thornes) at The University of Bergen Library. 
 
 
 
