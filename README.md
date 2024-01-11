@@ -20,7 +20,7 @@ The norms can be used in various ways.
 For Norwegian libraries in the BIBSYS-consortia, the norms can easily be used on imported records in two ways:
 1. Use the Enhance Record-function in MDE and choose "UBB-hylleklare bøker"
    or,
-2. Open split mode in MDE, with the bibliographic record on one side, choose Rules on the other and search "UBB-hylleklare bøker". This will enable you to preview the changes before applying the norms. **(Important! Do NOT change the code directly in "UBB-hylleklare bøker"**
+2. Open split mode in MDE, with the bibliographic record on one side, choose Rules on the other and search "UBB-hylleklare bøker". This will enable you to preview the changes before applying the norms. **Important! Do NOT change the code directly in "UBB-hylleklare bøker"**
 
 For libraries outside the consortia it is possible to copy the latest version from [versions](https://github.com/carinath/ubb-norcat-norms/tree/main/versions). Feel free to save a local copy and modify as needed :-)
 
