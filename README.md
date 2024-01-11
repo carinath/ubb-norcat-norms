@@ -5,6 +5,15 @@ Ubb-norcat-norms can be used to change bibliographic records imported from exern
 
 ## What it does
 
+This set of norms transforms imported bibliographic records to records following Norwegian cataloging rules. Some of the functions include:
+* Translating common words and expressions to Norwegian ("paperback" to "heftet, "Includes bibliographic references (p. 162-189)" to "Bibliografi: side 162-189" (and much more)). Mainly from English, Swedish and German, but more translations will be included in updated versions.
+* Deleting redundant fields
+* Correcting various indicators and control fields
+* Removing ISBD-punctuation
+* Other small functions not mentioned (see the code for a full overview)
+
+**Note: The norms cannot be used as an alternative to cataloging. A lot of repetative actions are automated, but the norms does not check if the data in the imported record are correct. All records must still be controlled by a skilled professional ;-)**
+
 ## How to use ubb-norcat-norms
 
 The norms can be used in various ways. 
