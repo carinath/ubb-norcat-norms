@@ -24,6 +24,10 @@ For Norwegian libraries in the BIBSYS-consortia, the norms can easily be used on
 
 For libraries outside the consortia it is possible to copy the latest version from [versions](https://github.com/carinath/ubb-norcat-norms/tree/main/versions). Feel free to save a local copy and modify as needed :-)
 
+ ## Suggested workflow
+
+![Suggested workflow](/images/ubb-norcat-norms_workflow.PNG?raw=true)
+
  ## Need help?
 
  For technical issues or help see [Ex Libris' site](https://knowledge.exlibrisgroup.com/Alma/Product_Documentation/010Alma_Online_Help_(English)/Metadata_Management/016Working_with_Rules/020Working_with_Normalization_Rules). Ideas or need an update in the  version available in the the BIBSYS-consortia network? Contact [Carina](https://www.uib.no/personer/Carina.Thornes) at The University of Bergen Library. 
