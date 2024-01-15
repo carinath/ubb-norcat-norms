@@ -12,6 +12,12 @@ Ubb-norcat-norms transforms imported bibliographic records to records following 
 * Removing ISBD-punctuation
 * Other small functions not mentioned (see the code for a full overview)
 
+### Example
+
+![Example](/images/ubb-norcat-norms_example.PNG?raw=true)
+
+(Result after applying ubb-norcat-norms to the right)
+
 **Note: The norms cannot be used as an alternative to cataloging. A lot of repetative actions are automated, but the norms does not check if the data in imported records are correct. All records must still be controlled by a skilled professional ;-)**
 
 ## How to use ubb-norcat-norms
