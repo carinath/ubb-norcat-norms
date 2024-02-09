@@ -1,0 +1,1121 @@
+# BEGIN REMOVE SEMICOLON FROM 490 A
+rule "One Remove semicolon from 490 A"
+priority 500
+when
+(TRUE)
+then
+suffix "490.a" with "temporary_suffix_to_replace"
+end
+
+rule "Two Remove semicolon from 490 A "
+priority 499
+when
+(TRUE)
+then
+replaceContents "490.a.;temporary_suffix_to_replace" with ""
+end
+
+rule "Three Remove semicolon from 490 A "
+priority 498
+when
+(TRUE)
+then
+replaceContents "490.a.temporary_suffix_to_replace" with ""
+end
+# END REMOVE SEMICOLON FROM 490 A
+
+# BEGIN RULE THAT REMOVES EXCESSIVE 300 A FIELDS
+rule "Make all subfields A except the first blank"
+priority 15
+when
+(TRUE)
+then
+replaceContentsExceptFirst "300.a" with ""
+end
+# END RULE THAT REMOVES EXCESSIVE 300 A FIELDS
+
+# BEGIN RULE TO REMOVE COMMA FROM 600 A
+rule "One Replace comma in 600 A with nothing"
+priority 13
+when
+(TRUE)
+then
+suffix "600.a" with "temporary_suffix_to_replace"
+end
+
+rule "Two Replace comma in 600 A with nothing"
+priority 12
+when
+(TRUE)
+then
+replaceContents "600.a.,temporary_suffix_to_replace" with ""
+end
+
+rule "Three Replace comma in 600 A with nothing"
+priority 11
+when
+(TRUE)
+then
+replaceContents "600.a.temporary_suffix_to_replace" with ""
+end
+# END RULE TO REMOVE COMMA FROM 600 A
+
+# BEGIN RULE TO REMOVE PERIOD FROM 500 A
+rule "One Remove period from 500"
+priority 29
+when
+(TRUE)
+then
+suffix "500.a" with "temporary_suffix_to_replace"
+end
+
+rule "Two Remove period from 500"
+priority 28
+when
+(TRUE)
+then
+ReplaceContents "500.a.\\\\.temporary_suffix_to_replace" with ""
+end
+
+rule "Three Remove period from 500"
+priority 27
+when
+(TRUE)
+then
+replaceContents "500.a.temporary_suffix_to_replace" with ""
+end
+# END RULE TO REMOVE PERIOD FROM 500 A
+
+# BEGIN RULE TO REMOVE PERIOD FROM 250 A
+rule "One Remove period from 250 A"
+priority 29
+when
+(TRUE)
+then
+suffix "250.a" with "temporary_suffix_to_replace"
+end
+
+rule "Two Remove period from 250 A"
+priority 28
+when
+(TRUE)
+then
+replaceContents "250.a.\\\\.temporary_suffix_to_replace" with ""
+end
+
+rule "Three Remove period from 250 A"
+priority 27
+when
+(TRUE)
+then
+replaceContents "250.a.temporary_suffix_to_replace" with ""
+end
+# END RULE TO REMOVE PERIOD FROM 250 A
+
+# BEGIN RULE TO COPY CONTENTS FROM 490 TO 830
+rule "copy 490 to 830"
+priority 40
+when
+( exists "490.a" ) AND (not exists "830.a")
+then
+changeFirstIndicator "490" to "1"
+copyField "490" to "830"
+changeFirstIndicator "830" to " "
+changeSecondIndicator "830" to "0"
+end
+# END RULE TO COPY CONTENTS FROM 490 TO 830
+
+# BEGIN RULES TO FIX INDICATORS ACCORDING TO LANGUAGE CODE IN 008
+rule "Fix 2nd indicator for English in 830"
+when
+(existsControl "008.{35,3}.eng")
+then
+changeSecondIndicator "830" to "4" if (exists "830.{*,*}.a.The *")
+changeSecondIndicator "830" to "3" if (exists "830.{*,*}.a.An *")
+changeSecondIndicator "830" to "2" if (exists "830.{*,*}.a.A *")
+end
+
+rule "Fix 2nd indicator for French in 830"
+when
+(existsControl "008.{35,3}.fre")
+then
+changeSecondIndicator "830" to "3" if (exists "830.{*,*}.a.La *")
+changeSecondIndicator "830" to "3" if (exists "830.{*,*}.a.Le *")
+changeSecondIndicator "830" to "4" if (exists "830.{*,*}.a.Les *")
+changeSecondIndicator "830" to "3" if (exists "830.{*,*}.a.Un *")
+changeSecondIndicator "830" to "4" if (exists "830.{*,*}.a.Une *")
+changeSecondIndicator "830" to "2" if (exists "830.{*,*}.a.L'*")
+changeSecondIndicator "830" to "4" if (exists "830.{*,*}.a.Des *")
+end
+
+rule "Fix 2nd indicator for Spanish in 830"
+when
+(existsControl "008.{35,3}.spa")
+then
+changeSecondIndicator "830" to "3" if (exists "830.{*,*}.a.El *")
+changeSecondIndicator "830" to "3" if (exists "830.{*,*}.a.Lo *")
+changeSecondIndicator "830" to "3" if (exists "830.{*,*}.a.La *")
+changeSecondIndicator "830" to "4" if (exists "830.{*,*}.a.Las *")
+changeSecondIndicator "830" to "4" if (exists "830.{*,*}.a.Los *")
+changeSecondIndicator "830" to "4" if (exists "830.{*,*}.a.Uno *")
+changeSecondIndicator "830" to "4" if (exists "830.{*,*}.a.Una *")
+changeSecondIndicator "830" to "3" if (exists "830.{*,*}.a.Un *")
+changeSecondIndicator "830" to "5" if (exists "830.{*,*}.a.Unos *")
+changeSecondIndicator "830" to "5" if (exists "830.{*,*}.a.Unas *")
+end
+
+rule "Fix 2nd indicator for German in 830"
+when
+(existsControl "008.{35,3}.ger")
+then
+changeSecondIndicator "830" to "4" if (exists "830.{*,*}.a.Das *")
+changeSecondIndicator "830" to "4" if (exists "830.{*,*}.a.Der *")
+changeSecondIndicator "830" to "4" if (exists "830.{*,*}.a.Din *")
+changeSecondIndicator "830" to "5" if (exists "830.{*,*}.a.Dine *")
+changeSecondIndicator "830" to "4" if (exists "830.{*,*}.a.Die *")
+end
+
+rule "Fix 2nd indicator for Italian in 830"
+when
+(existsControl "008.{35,3}.ita")
+then
+changeSecondIndicator "830" to "4" if (exists "830.{*,*}.a.Gli *")
+changeSecondIndicator "830" to "4" if (exists "830.{*,*}.a.Gl' *")
+changeSecondIndicator "830" to "2" if (exists "830.{*,*}.a.I *")
+changeSecondIndicator "830" to "3" if (exists "830.{*,*}.a.Il *")
+changeSecondIndicator "830" to "3" if (exists "830.{*,*}.a.La *")
+changeSecondIndicator "830" to "3" if (exists "830.{*,*}.a.Le *")
+changeSecondIndicator "830" to "3" if (exists "830.{*,*}.a.Lo *")
+changeSecondIndicator "830" to "3" if (exists "830.{*,*}.a.L' *")
+end
+
+rule "Fix 2nd indicator for Dutch in 830"
+when
+(existsControl "008.{35,3}.dut")
+then
+changeSecondIndicator "830" to "4" if (exists "830.{*,*}.a.Een *")
+changeSecondIndicator "830" to "4" if (exists "830.{*,*}.a.Het *")
+changeSecondIndicator "830" to "3" if (exists "830.{*,*}.a.De *")
+changeSecondIndicator "830" to "4" if (exists "830.{*,*}.a.Des *")
+changeSecondIndicator "830" to "4" if (exists "830.{*,*}.a.Der *")
+changeSecondIndicator "830" to "3" if (exists "830.{*,*}.a.'s *")
+changeSecondIndicator "830" to "3" if (exists "830.{*,*}.a.'t *")
+changeSecondIndicator "830" to "5" if (exists "830.{*,*}.a.Eene *")
+changeSecondIndicator "830" to "3" if (exists "830.{*,*}.a.'n *")
+changeSecondIndicator "830" to "4" if (exists "830.{*,*}.a.Ene *")
+end
+
+rule "Fix 2nd indicator for Portuguese in 830"
+when
+(existsControl "008.{35,3}.por")
+then
+changeSecondIndicator "830" to "2" if (exists "830.{*,*}.a.O *")
+changeSecondIndicator "830" to "2" if (exists "830.{*,*}.a.A *")
+changeSecondIndicator "830" to "3" if (exists "830.{*,*}.a.Os *")
+changeSecondIndicator "830" to "3" if (exists "830.{*,*}.a.As *")
+changeSecondIndicator "830" to "3" if (exists "830.{*,*}.a.Um *")
+changeSecondIndicator "830" to "4" if (exists "830.{*,*}.a.Uma *")
+end
+
+rule "Fix 2nd indicator for English in 245"
+when
+(existsControl "008.{35,3}.eng")
+then
+changeSecondIndicator "245" to "4" if (exists "245.{*,*}.a.The *")
+changeSecondIndicator "245" to "3" if (exists "245.{*,*}.a.An *")
+changeSecondIndicator "245" to "2" if (exists "245.{*,*}.a.A *")
+end
+
+rule "Fix 2nd indicator for French in 245"
+when
+(existsControl "008.{35,3}.fre")
+then
+changeSecondIndicator "245" to "3" if (exists "245.{*,*}.a.La *")
+changeSecondIndicator "245" to "3" if (exists "245.{*,*}.a.Le *")
+changeSecondIndicator "245" to "4" if (exists "245.{*,*}.a.Les *")
+changeSecondIndicator "245" to "3" if (exists "245.{*,*}.a.Un *")
+changeSecondIndicator "245" to "4" if (exists "245.{*,*}.a.Une *")
+changeSecondIndicator "245" to "2" if (exists "245.{*,*}.a.L'*")
+changeSecondIndicator "245" to "4" if (exists "245.{*,*}.a.Des *")
+end
+
+rule "Fix 2nd indicator for Spanish in 245"
+when
+(existsControl "008.{35,3}.spa")
+then
+changeSecondIndicator "245" to "3" if (exists "245.{*,*}.a.El *")
+changeSecondIndicator "245" to "3" if (exists "245.{*,*}.a.Lo *")
+changeSecondIndicator "245" to "3" if (exists "245.{*,*}.a.La *")
+changeSecondIndicator "245" to "4" if (exists "245.{*,*}.a.Las *")
+changeSecondIndicator "245" to "4" if (exists "245.{*,*}.a.Los *")
+changeSecondIndicator "245" to "4" if (exists "245.{*,*}.a.Uno *")
+changeSecondIndicator "245" to "4" if (exists "245.{*,*}.a.Una *")
+changeSecondIndicator "245" to "3" if (exists "245.{*,*}.a.Un *")
+changeSecondIndicator "245" to "5" if (exists "245.{*,*}.a.Unos *")
+changeSecondIndicator "245" to "5" if (exists "245.{*,*}.a.Unas *")
+end
+
+rule "Fix 2nd indicator for German in 245"
+when
+(existsControl "008.{35,3}.ger")
+then
+changeSecondIndicator "245" to "4" if (exists "245.{*,*}.a.Das *")
+changeSecondIndicator "245" to "4" if (exists "245.{*,*}.a.Der *")
+changeSecondIndicator "245" to "4" if (exists "245.{*,*}.a.Din *")
+changeSecondIndicator "245" to "5" if (exists "245.{*,*}.a.Dine *")
+changeSecondIndicator "245" to "4" if (exists "245.{*,*}.a.Die *")
+end
+
+rule "Fix 2nd indicator for Italian in 245"
+when
+(existsControl "008.{35,3}.ita")
+then
+changeSecondIndicator "245" to "4" if (exists "245.{*,*}.a.Gli *")
+changeSecondIndicator "245" to "4" if (exists "245.{*,*}.a.Gl' *")
+changeSecondIndicator "245" to "2" if (exists "245.{*,*}.a.I *")
+changeSecondIndicator "245" to "3" if (exists "245.{*,*}.a.Il *")
+changeSecondIndicator "245" to "3" if (exists "245.{*,*}.a.La *")
+changeSecondIndicator "245" to "3" if (exists "245.{*,*}.a.Le *")
+changeSecondIndicator "245" to "3" if (exists "245.{*,*}.a.Lo *")
+changeSecondIndicator "245" to "3" if (exists "245.{*,*}.a.L' *")
+end
+
+rule "Fix 2nd indicator for Dutch in 245"
+when
+(existsControl "008.{35,3}.dut")
+then
+changeSecondIndicator "245" to "4" if (exists "245.{*,*}.a.Een *")
+changeSecondIndicator "245" to "4" if (exists "245.{*,*}.a.Het *")
+changeSecondIndicator "245" to "3" if (exists "245.{*,*}.a.De *")
+changeSecondIndicator "245" to "4" if (exists "245.{*,*}.a.Des *")
+changeSecondIndicator "245" to "4" if (exists "245.{*,*}.a.Der *")
+changeSecondIndicator "245" to "3" if (exists "245.{*,*}.a.'s *")
+changeSecondIndicator "245" to "3" if (exists "245.{*,*}.a.'t *")
+changeSecondIndicator "245" to "5" if (exists "245.{*,*}.a.Eene *")
+changeSecondIndicator "245" to "3" if (exists "245.{*,*}.a.'n *")
+changeSecondIndicator "245" to "4" if (exists "245.{*,*}.a.Ene *")
+end
+
+rule "Fix 2nd indicator for Portuguese in 245"
+when
+(existsControl "008.{35,3}.por")
+then
+changeSecondIndicator "245" to "2" if (exists "245.{*,*}.a.O *")
+changeSecondIndicator "245" to "2" if (exists "245.{*,*}.a.A *")
+changeSecondIndicator "245" to "3" if (exists "245.{*,*}.a.Os *")
+changeSecondIndicator "245" to "3" if (exists "245.{*,*}.a.As *")
+changeSecondIndicator "245" to "3" if (exists "245.{*,*}.a.Um *")
+changeSecondIndicator "245" to "4" if (exists "245.{*,*}.a.Uma *")
+end
+# END RULES TO FIX INDICATORS ACCORDING TO LANGUAGE CODE IN 008
+
+# BEGIN RULES TO REMOVE 020-FIELDS WITH NON-PHYSICAL FORMATS
+rule "Remove 020 when non physical format"
+priority 26
+when
+(TRUE)
+then
+removeField "020" if (exists "020.z.*PDF*")
+removeField "020" if (exists "020.z.*ebook*")
+removeField "020" if (exists "020.z.*Mobi*")
+removeField "020" if (exists "020.z.*Epub*")
+removeField "020" if (exists "020.z.*ebk*")
+removeField "020" if (exists "020.q.*ePub*")
+removeField "020" if (exists "020.q.*PDF ebook*")
+removeField "020" if (exists "020.q.*epdf*")
+removeField "020" if (exists "020.q.*ebook*")
+removeField "020" if (exists "020.q.*e-book*")
+removeField "020" if (exists "020.q.*(pdf)*")
+removeField "020" if (exists "020.q.*(epub)*")
+removeField "020" if (exists "020.q.*open access pdf*")
+removeField "020" if (exists "020.q.*kindle*")
+removeField "020" if (exists "020.a.*(electronic; e-ISBN)*")
+removeField "020" if (exists "020.q.*(*electronic book*")
+removeField "020" if (exists "020.z.*Pub ebook*")
+end
+# END RULES TO REMOVE 020-FIELDS WITH NON-PHYSICAL FORMATS
+
+# BEGIN RULES TO TRANSLATE 5XX-FIELDS
+rule "Translate expressions in 500"
+priority 25
+when
+(TRUE)
+then
+replaceContents "500.a.Previous edition." with "Forrige utgave"
+replaceContents "500.a.Translated from the French." with "Oversatt fra fransk" 
+replaceContents "500.a.Originally published" with "Opprinnelig utgitt"  
+replaceContents "500.a.Translated from the French\\\\." with "Oversatt fra fransk"
+end 
+
+rule "Replace expression Text in English, French and German. In 546"
+when
+(TRUE)
+then
+replaceContents "546.a.Text in English, French and German\\\\." with "Tekst på engelsk, fransk og tysk"
+end
+# END RULES TO TRANSLATE 5XX-FIELDS
+
+# BEGIN RULES TO TRANSLATE 020 Q-SUBFIELDS
+# NOTE PRIORITY LEVELS DUE TO RULES OWERWRITING EACH OTHER
+rule "Translate expressions in 020 v1"
+priority 27
+when
+(TRUE)
+then
+replaceContents "020.q.(cloth : alk. paper)" with "innbundet" 
+replaceContents "020.q.(pbk\\\\. : alk. paper)" with "heftet" 
+replaceContents "020.q.hb : alk. paper" with "innbundet"
+replaceContents "020.q.pb : alk. paper" with "heftet"  
+replaceContents "020.q.(hbk)" with "innbundet"
+replaceContents "020.q.(pbk)" with "heftet"  
+end 
+
+rule "Translate expressions in 020 v2"
+priority 26
+when
+(TRUE)
+then
+replaceContents "020.q.(hardcover)" with "innbundet" 
+replaceContents "020.q.(cloth)" with "innbundet" 
+replaceContents "020.q.(hbk\\\\.)" with "innbundet" 
+replaceContents "020.q.(hardback)" with "innbundet" 
+replaceContents "020.q.(paperback)" with "heftet"
+replaceContents "020.q.HBK\\\\." with "innbundet"
+replaceContents "020.q.halvklotband" with "innbundet"
+replaceContents "020.q.h\\\\. :" with "heftet"
+replaceContents "020.q.(pbk\\\\.)" with "heftet"
+replaceContents "020.q.*softcover*" with "heftet"
+replaceContents "020.q.kovakantinen" with "innbundet"
+replaceContents "020.q.pehmeäkantinen" with "heftet"
+replaceContents "020.q.inb\\\\." with "innbundet"
+replaceContents "020.q.hft\\\\." with "heftet"
+replaceContents "020.q.inbunded" with "innbundet"
+replaceContents "020.q.*innbunden*" with "innbundet"
+end 
+
+rule "Translate expressions in 020 v3"
+priority 25
+when
+(TRUE)
+then
+replaceContents "020.q.häftad" with "heftet" 
+replaceContents "020.q.hbk\\\\." with "innbundet" 
+replaceContents "020.q.pocket" with "heftet" 
+replaceContents "020.q.pbk\\\\." with "heftet"  
+replaceContents "020.q.paperback" with "heftet"
+replaceContents "020.q.hardcover" with "innbundet"
+replaceContents "020.q.hardback" with "innbundet"
+replaceContents "020.q.(hardcover)" with "innbundet" 
+replaceContents "020.q.inbunden" with "innbundet"
+replaceContents "020.q.(Hardback)" with "innbundet"
+replaceContents "020.q.mjuka pärmar" with "heftet" 
+replaceContents "020.q.hårda pärmar" with "innbundet"  
+replaceContents "020.q.(Paperback)" with "heftet" 
+replaceContents "020.q.h\\\\." with "heftet"      
+replaceContents "020.a.:" with "" 
+replaceContents "020.a.(alk. paper)" with "" 
+end 
+
+rule "Translate expressions in 020 q v4"
+priority 24
+when
+(TRUE)
+then
+replaceContents "020.q.hbk" with "innbundet"
+replaceContents "020.q.pbk" with "heftet" 
+end 
+# END RULES TO TRANSLATE 020 Q-SUBFIELDS
+
+# BEGIN RULES TO MOVE AND TRANSLATE PHYSICAL DESCRIPTION FROM 020 A OR C TO 020 Q
+rule "Move (hbk.) : in 020 a"
+priority 26
+when
+(TRUE)
+then
+addSubField "020.q.innbundet" if (exists "020.a.*(hbk\\\\.) :")
+replaceContents "020.a.(hbk\\\\.) :" with "" 
+end
+
+rule "Move (hardback) : in 020 a"
+priority 26
+when
+(TRUE)
+then
+addSubField "020.q.innbundet" if (exists "020.a.*(hardback) :")
+replaceContents "020.a.(hardback) :" with "" 
+end
+
+rule "Move Festeinband 020 c"
+priority 26
+when
+(TRUE)
+then
+addSubField "020.q.innbundet" if (exists "020.c.*Festeinband*")
+removeSubField "020.c"
+end
+
+rule "Move (cloth  alk. paper) : in 020 a"
+priority 26
+when
+(TRUE)
+then
+addSubField "020.q.innbundet" if (exists "020.a.*(cloth  alk\\\\. paper)")
+replaceContents "020.a.(cloth  alk\\\\. paper)" with "" 
+end
+
+rule "Move (paper  alk. paper) : i 020 a"
+priority 26
+when
+(TRUE)
+then
+addSubField "020.q.heftet" if (exists "020.a.*(paper alk\\\\. paper)")
+replaceContents "020.a.(paper alk\\\\. paper)" with "" 
+end
+
+rule "Move (alk\\\\. paper) : i 020 a"
+priority 25
+when
+(TRUE)
+then
+replaceContents "020.a.(alk\\\\. paper)" with "" 
+end
+
+rule "Move (cased) : in 020 a"
+priority 27
+when
+(TRUE)
+then
+addSubField "020.q.innbundet" if (exists "020.a.*(cased) :")
+replaceContents "020.a.(cased) :" with "" 
+end
+
+rule "Move (cased) in 020 a og erstatt med innbundet i q"
+priority 26
+when
+(TRUE)
+then
+addSubField "020.q.innbundet" if (exists "020.a.*(cased)")
+replaceContents "020.a.(cased)" with "" 
+end
+
+rule "Move (paperback) : in 020 a"
+priority 26
+when
+(TRUE)
+then
+addSubField "020.q.heftet" if (exists "020.a.*(paperback)")
+replaceContents "020.a.(paperback)" with "" 
+end
+
+rule "Move (pbk.) : in 020 a"
+priority 25
+when
+(TRUE)
+then
+addSubField "020.q.heftet" if (exists "020.a.*(pbk\\\\.) :")
+replaceContents "020.a.(pbk\\\\.) :" with "" 
+end
+
+rule "Move (pbk) : in 020 a"
+priority 25
+when
+(TRUE)
+then
+addSubField "020.q.heftet" if (exists "020.a.*(pbk) :")
+replaceContents "020.a.(pbk) :" with "" 
+end
+
+rule "Move (pbk.) i 020 a"
+priority 25
+when
+(TRUE)
+then
+addSubField "020.q.heftet" if (exists "020.a.*(pbk\\\\.)")
+replaceContents "020.a.(pbk\\\\.)" with "" 
+end
+
+rule "Move (hbk.) in 020 a"
+priority 25
+when
+(TRUE)
+then
+addSubField "020.q.innbundet" if (exists "020.a.*(hbk\\\\.)")
+replaceContents "020.a.(hbk\\\\.)" with "" 
+end
+
+rule "Move (hardcover) in 020 a"
+priority 25
+when
+(TRUE)
+then
+addSubField "020.q.innbundet" if (exists "020.a.*(hardcover)")
+replaceContents "020.a.(hardcover)" with "" 
+end
+
+rule "Move (hardback) i 020 a"
+priority 25
+when
+(TRUE)
+then
+addSubField "020.q.innbundet" if (exists "020.a.*(hardback)")
+replaceContents "020.a.(hardback)" with "" 
+end
+
+rule "Move (pbk alk.) : in 020 a"
+priority 25
+when
+(TRUE)
+then
+addSubField "020.q.heftet" if (exists "020.a.*(pbk\\\\. : alk\\\\. paper)")
+replaceContents "020.a.(pbk\\\\. : alk\\\\. paper)" with "" 
+end
+
+rule "Move (paperback.) : in 020 a"
+priority 25
+when
+(TRUE)
+then
+addSubField "020.q.heftet" if (exists "020.a.*(paperback) :")
+replaceContents "020.a.(paperback) :" with "" 
+end
+
+rule "Move Broschur in 020 c"
+priority 24
+when
+(TRUE)
+then
+addSubField "020.q.heftet" if (exists "020.c.*Broschur*")
+removeSubField "020.c" 
+end
+
+rule "Move  (pbk.) : i 020 a"
+priority 24
+when
+(TRUE)
+then
+addSubField "020.q.heftet" if (exists "020.a.*(pbk\\\\.) :")
+replaceContents "020.a.(pbk\\\\.) :" with "" 
+end
+# END RULES TO MOVE AND TRANSLATE PHYSICAL DESCRIPTION FROM 020 A OR C TO 020 Q
+
+# BEGIN RULE THAT REMOVES ANY SUBFIELD C IN 020
+rule "Remove 020 subfield c"
+priority 23
+when
+(TRUE)
+then
+removeSubField "020.c" 
+end
+# END RULE THAT REMOVES ANY SUBFIELD C IN 020
+
+# BEGIN RULE TO ADD MISSING ROLE AUT IN 100 
+rule "Add aut in 100"
+priority 22
+when
+( not exists "100.4")
+(TRUE)
+then
+addSubField "100.4.aut"
+end
+# END RULE TO ADD MISSING ROLE AUT IN 100
+
+# BEGIN RULE TO REMOVE COMMA FROM 700A
+rule "One Remove comma from 700 a"
+priority 20
+when
+(TRUE)
+then
+suffix "700.a" with "temporary_suffix_to_replace"
+end
+
+rule "Two Remove comma from 700 a"
+priority 19
+when
+(TRUE)
+then
+replaceContents "700.a.,temporary_suffix_to_replace" with ""
+end
+
+rule "Three Remove comma from 700 a"
+priority 18
+when
+(TRUE)
+then
+replaceContents "700.a.temporary_suffix_to_replace" with ""
+end
+# END RULE TO REMOVE COMMA FROM 700A
+
+# BEGIN RULE TO REMOVE SQUARE-SYMBOL FROM 245A WHEN THE EXPRESSION IS DAS
+rule "Remove square from Das in 245 "
+when
+(TRUE)
+then
+replaceContents "245.a.Das" with "Das"
+end
+# END RULE TO REMOVE SQUARE-SYMBOL FROM 245A WHEN THE EXPRESSION IS DAS
+
+# BEGIN VARIOUS RULES TO TRANSLATE EXPRESSIONS IN 300
+# NOTE PRIORITY LEVELS BECAUSE SOME RULES CAN OWERWRITE EACH OTHER
+rule "Translate unnumbered pages of plates in 300 c"
+priority 21
+when
+(TRUE)
+then
+replaceContents "300.a.unnumbered pages of plates" with "unummererte sider med plansjer"
+end
+
+rule "Translate expressions in 300 v1"
+priority 17
+when
+(TRUE)
+then
+replaceContents "300.c.\\\\." with ""
+replaceContents "300.a.pages cm" with "sider"
+replaceContents "300.a.(unpaged)" with "(unummerert)"
+replaceContents "300.a.sivua" with "sider"
+replaceContents "300.a.S\\\\." with "sider"
+end
+
+rule "Translate expressions in 300 v2"
+priority 16
+when
+(TRUE)
+then
+replaceContents "300.a.:" with ""
+replaceContents "300.a.\\\\." with ""
+replaceContents "300.a.sidor" with "sider"
+replaceContents "300.a.1 volume" with "1 bind"
+replaceContents "300.a.pages" with "sider"
+replaceContents "300.a.p\\\\." with "sider"
+replaceContents "300.a.s\\\\." with "sider"
+replaceContents "300.b.zahlr\\\\." with ""
+end
+
+rule "Translate expressions in 300 v3"
+priority 20
+when
+(TRUE)
+then
+replaceContents "300.a.p\\\\. ;" with "sider"
+replaceContents "300.a.p\\\\. :" with "sider"
+replaceContents "300.a.s\\\\." with "sider"
+end
+
+rule "Remove semicolon from 300A"
+priority 17
+when
+(TRUE)
+then
+replaceContents "300.a.;" with ""
+end
+
+rule "Translate expressions in 300 v4"
+priority 14
+when
+(TRUE)
+then
+replaceContents "300.a.p" with "sider"
+end
+
+rule "Translate expressions in 300 v5"
+priority 10
+when
+(TRUE)
+then
+replaceContents "300.b.color illustrations" with "illustrasjoner (farger)"
+replaceContents "300.b.(chiefly color)" with "(hovedsakelig i farger)"
+replaceContents "300.b.(chiefly col.)" with "(hovedsakelig i farger)"
+replaceContents "300.b.color portrait" with "fargeportrett"
+end
+
+rule "Translate expressions in 300 v6"
+priority 100
+when
+(TRUE)
+then
+replaceContents "300.b. and colour" with " farger"
+end
+
+rule "Translate expressions in 300 v7"
+when
+(TRUE)
+then
+replaceContents "300.b.;" with ""
+replaceContents "300.b.ill\\\\." with "illustrasjoner"
+replaceContents "300.b.Abbildungen" with "illustrasjoner"
+replaceContents "300.b.illustrationer" with "illustrasjoner"
+replaceContents "300.b.Illustrationer" with "illustrasjoner"
+replaceContents "300.b.maps" with "kart"
+replaceContents "300.b.map" with "kart"
+replaceContents "300.b.chiefly" with "hovedsakelig"
+replaceContents "300.b.huvudsakligen" with "hovedsakelig"
+replaceContents "300.b.colour" with "farger"
+replaceContents "300.b.zahlreiche Farbabbildungen" with "illustrasjoner (farger)"
+replaceContents "300.b.(some col\\\\.)" with "(noen i farger)"
+replaceContents "300.b.(some color)" with "(noen i farger)"
+replaceContents "300.b.portraits" with "portretter"
+replaceContents "300.b.kuvitettu" with "illustrasjoner"
+replaceContents "300.b.nuotteja" with "noter"
+replaceContents "300.b.taulukkoja" with "tabeller"
+replaceContents "300.b.Illustrationen" with "illustrasjoner"
+replaceContents "300.b.Ill\\\\." with "illustrasjoner"
+end
+
+rule "Translate expressions in 300 v8"
+when
+(TRUE)
+then
+replaceContents "300.a.s\\\\." with "sider"
+replaceContents "300.a.S\\\\." with "sider"
+replaceContents "300.b.Ill\\\\., graph\\\\. Darst\\\\., Noten" with "illustrasjoner"
+replaceContents "300.b.illustrations" with "illustrasjoner"
+replaceContents "300.b.black and white" with "svart/hvitt"
+replaceContents "300.a.Seiten" with "sider"
+end
+
+rule "Remove Noten in 300 for German import"
+when
+(exists "040.{-,-}.c.DE-101")
+then
+replaceContents "300.b.Noten" with "noter"
+end
+#END VARIOUS RULES TO TRANSLATE EXPRESSIONS IN 300
+
+
+
+#BEGIN RULES TO TRANSLATE 336-338-FIELDS 
+rule "Edit 336"
+priority 16
+when 
+(TRUE)
+then
+removeField "336"
+addField "336.a.tekst" 
+addSubField "336.0.http://rdaregistry.info/termList/RDAContentType/1020"
+addSubField "336.2.rdaco"
+end
+
+rule "Edit 337"
+priority 15
+when 
+(TRUE)
+then
+removeField "337"
+addField "337.a.uformidlet"
+addSubField "337.0.http://rdaregistry.info/termList/RDAMediaType/1007"
+addSubField "337.2.rdamt"
+end
+
+rule "Edit 338"
+priority 14
+when 
+(TRUE)
+then
+removeField "338"
+addField "338.a.bind" 
+addSubField "338.0.http://rdaregistry.info/termList/RDACarrierType/1049"
+addSubField "338.2.rdact" 
+end
+#END RULES TO TRANSLATE 336-338-FIELDS 
+
+# BEGIN RULE TO REMOVE COMMA AT THE END OF 100 A
+rule "One Remove comma from 100 a"
+priority 13
+when
+(TRUE)
+then
+suffix "100.a" with "temporary_suffix_to_replace"
+end
+
+rule "Two Remove comma from 100 a "
+priority 12
+when
+(TRUE)
+then
+replaceContents "100.a.,temporary_suffix_to_replace" with ""
+end
+
+rule "Three Remove comma from 100 a"
+priority 11
+when
+(TRUE)
+then
+replaceContents "100.a.temporary_suffix_to_replace" with ""
+end
+# END RULE TO REMOVE COMMA AT THE END OF 100 A
+
+# BEGIN RULE TO REMOVE COMMA AT THE END OF 100 D
+rule "One Remove comma from 100 d"
+priority 13
+when
+(TRUE)
+then
+suffix "100.d" with "temporary_suffix_to_replace"
+end
+
+rule "Two Remove comma from 100 d"
+priority 12
+when
+(TRUE)
+then
+replaceContents "100.d.,temporary_suffix_to_replace" with ""
+end
+
+rule "Three Remove comma from 100 d"
+priority 11
+when
+(TRUE)
+then
+replaceContents "100.d.temporary_suffix_to_replace" with ""
+end
+# END RULE TO REMOVE COMMA AT THE END OF 100 D
+
+# BEGIN RULE TO REMOVE COMMA AT THE END OF 245 C
+rule "One Remove comma from 245 c"
+priority 10
+when
+(TRUE)
+then
+suffix "245.c" with "temporary_suffix_to_replace"
+end
+
+rule "Two Remove comma from 245 c"
+priority 9
+when
+(TRUE)
+then
+replaceContents "245.c.\\\\.temporary_suffix_to_replace" with ""
+end
+
+rule "Three Remove comma from 245 c"
+priority 8
+when
+(TRUE)
+then
+replaceContents "245.c.temporary_suffix_to_replace" with ""
+end
+# END RULE TO REMOVE COMMA AT THE END OF 245 C
+
+# BEGIN RULES TO REMOVE BACKSLASH FROM 245
+rule "Remove backslash from 245 b"
+priority 7
+when
+(TRUE)
+then
+replaceContents "245.b./" with ""
+end
+
+rule "Remove backslash from 245 a"
+priority 7
+when
+(TRUE)
+then
+replaceContents "245.a./" with ""
+end
+# END RULES TO REMOVE BACKSLASH FROM 245
+
+# BEGIN RULES TO REMOVE ISBD-PUNCTUATION FROM 264
+rule "Remove colon and semicolon from 264 a"
+priority 6
+when
+(TRUE)
+then
+replaceContents "264.a. :" with ""
+replaceContents "264.a. ;" with ""
+end
+
+rule "Remove colon and comma from 264 b"
+priority 5
+when
+(TRUE)
+then
+replaceContents "264.b.," with ""
+replaceContents "264.b.:" with ""
+end
+
+rule "Remove a period from 264 c"
+priority 4
+when
+(TRUE)
+then
+replaceContents "264.c.\\\\." with ""
+end
+# BEGIN RULES TO REMOVE ISBD-PUNCTUATION FROM 264
+
+# BEGIN RULE TO SET LDR TO ISBD-PUNCTUATION OMITTED
+rule "Change LDR pos 18 to c"
+when
+(TRUE)
+then
+replaceControlContents "LDR.{18,1}" with "c"
+end
+# END RULE TO SET LDR TO ISBD-PUNCTUATION OMITTED
+
+# BEGIN RULE TO REMOVE FIELD 044
+rule "Remove field 044"
+when
+(exists "044.c.*")
+then
+removeField "044"
+end
+# END RULE TO REMOVE FIELD 044
+
+# BEGIN RULES TO REMOVE 041 FROM GERMAN IMPORT
+rule "Remove 041 ger "
+when
+((exists "041.{-,-}.a.ger") AND (exists "040.{-,-}.c.DE-101"))
+then
+removeField "041"
+end
+
+rule "Remove 041 eng"
+when
+((exists "041.{-,-}.a.eng") AND (exists "040.{-,-}.c.DE-101"))
+then
+removeField "041"
+end
+# END RULES TO REMOVE 041 FROM GERMAN IMPORT
+
+# BEGIN RULE TO REMOVE 028 FROM GERMAN IMPORT
+rule "Remove 028 from German import"
+when
+((exists "028.{5,2}.a.*") AND (exists "040.{-,-}.c.DE-101"))
+then
+removeField "028"
+end
+# BEGIN RULE TO REMOVE 028 FROM GERMAN IMPORT
+
+# BEGIN RULE TO REMOVE UNWANTED 500-FIELDS
+rule "Remove 500-fields by expressions"
+when
+(TRUE)
+then
+removeField "530" if (exists "530.a.Also issued online\\\\.")
+removeField "500" if (exists "500.a.Formerly CIP\\\\.*")
+removeField "500" if (exists "500.5.Uk")
+removeField "500" if (exists "500.a.Literaturangaben")
+end
+# END RULE TO REMOVE UNWANTED 500-FIELDS
+
+# BEGIN RULE TO ADD 082 Q STDUBDS IF 082 EXISTS IN IMPORT FROM STDUBDS
+rule "Add StDuBDS to 082"
+when
+((exists "040.a.*StDuBDS*") AND (exists "082.{0,4}.a") AND (not exists "082.q"))
+then
+addSubField "082.q.StDuBDS"
+end
+# END RULE TO ADD 082 Q STDUBDS IF 082 EXISTS IN IMPORT FROM STDUBDS
+
+# BEGIN RULE TO REMOVE BACKSLASH FROM CLASSIFICATION NUMBER IN 082 A
+rule "Remove backslash from 082 a"
+when
+(TRUE)
+then
+replaceContents "082.a./" with ""
+end
+# END RULE TO REMOVE BACKSLASH FROM CLASSIFICATION NUMBER IN 082 A
+
+# BEGIN RULE TO SET CONTROL FIELDS IN 008
+rule "Set control fields in 008"
+when
+(TRUE)
+then
+replaceControlContents "008.{23,1}" with "#"
+replaceControlContents "008.{28,1}" with "|"
+replaceControlContents "008.{31,1}" with "|"
+replaceControlContents "008.{38,1}" with "|"
+end
+# END RULE TO SET REGULAR CONTROL FIELDS IN 008
+
+# BEGIN RULE TO REMOVE COMMA FROM 100 C
+rule "One Remove comma from 100 c"
+priority 20
+when
+(TRUE)
+then
+suffix "100.c" with "temporary_suffix_to_replace"
+end
+
+rule "Two Remove comma from 100 c"
+priority 19
+when
+ (TRUE)
+then
+replaceContents "100.c.,temporary_suffix_to_replace" with ""
+end
+
+rule "Three Remove comma from 100 c "
+priority 18
+when
+(TRUE)
+then
+replaceContents "700.c.temporary_suffix_to_replace" with ""
+end
+# END RULE TO REMOVE COMMA FROM 100 C
+
+# BEGIN RULE TO CREATE SPACE BETWEEN COPYRIGHT-SYMBOL AND COPYRIGHT-YEAR
+rule "Add space when copyright in 264"
+when
+(TRUE)
+then
+replaceContents "264.c.©2" with "© 2"
+replaceContents "264.c.©2" with "© 1" 
+end 
+# END RULE TO CREATE SPACE BETWEEN COPYRIGHT-SYMBOL AND COPYRIGHT-YEAR
+
+# BEGIN RULES TO REMOVE 504 IF PAGES IS NOT INCLUDED
+rule "Remove 504 Includes bibliographical references and index\\\\."
+priority 25
+when
+(TRUE)
+then
+removeField "504" if (exists "504.a.Includes bibliographical references and index\\\\.")
+end 
+
+rule "Remove 504 a Includes bibliographical references and index"
+priority 24
+when
+(TRUE)
+then
+end 
+
+rule "Remove 504 Includes bibliographical references\\\\."
+priority 23
+when
+(TRUE)
+then
+removeField "504" if (exists "504.a.Includes bibliographical references\\\\.")
+end 
+
+rule "Remove leftover parentheses from 504 a"
+priority 20
+when
+(TRUE)
+then
+replaceContents "504.a.)" with "" 
+end
+# END RULES TO REMOVE 504 IF PAGES IS NOT INCLUDED
+
+# BEGIN RULES TO TRANSLATE 504 IF PAGES IS INCLUDED
+rule "Translate  expressions in 504 a"
+priority 26
+when
+(TRUE)
+then
+replaceContents "504.a.Includes bibliographical references (pages" with "Bibliografi: side" 
+replaceContents "504.a.Includes bibliographical references (p\\\\." with "Bibliografi: side" 
+replaceContents "504.a.)\\\\." with "" 
+replaceContents "504.a.) and index\\\\." with "" 
+end
+# END RULES TO TRANSLATE 504 IF PAGES IS INCLUDED
+
+# BEGIN RULE TO REMOVE 500 WITH INDEX
+rule "Remove 500 a field with expression Includes index"
+when
+(TRUE)
+then
+removeField "500" if (exists "500.a.Includes index")
+end 
+# END RULE TO REMOVE 500 WITH INDEX
+
+
