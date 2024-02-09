@@ -1,7 +1,13 @@
 # ubb-norcat-norms
 
 This is a set of [normalization rules](https://knowledge.exlibrisgroup.com/Alma/Product_Documentation/010Alma_Online_Help_(English)/Metadata_Management/016Working_with_Rules/020Working_with_Normalization_Rules) (norms) for cataloging workflows in Ex Libris Alma.
-Ubb-norcat-norms can be used to change bibliographic records imported from exernal resources. This set of normalization rules are customized according to RDA and Norwegian cataloging rules and language.
+Ubb-norcat-norms can be used to change bibliographic records imported from exernal resources. This set of normalization rules are customized according to [RDA and Norwegian cataloging rules](https://rdakatalogisering.sikt.no/) and language.
+
+## Why use norms?
+
+At the University of Bergen Library, catalogers primarily spend time cataloging non-Norwegian materials in Alma. Bibliographic records for Norwegian publications are supplied from the National Library of Norway. 
+
+Therefore, our catalogers mostly work with bibliographic records imported from external catalogs in Alma, such as LOC, BNB and DNB, and correct these according to Norwegian RDA cataloging and language. By applying Ubb-norcat-norms, catalogers can spend less time on fixing small formal details, and instead focus on metadata enrichment.
 
 ## What it does
 
