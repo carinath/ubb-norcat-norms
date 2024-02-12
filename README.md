@@ -13,7 +13,9 @@ Therefore, our catalogers mostly work with bibliographic records imported from e
 
 Ubb-norcat-norms transforms imported bibliographic records to records following Norwegian cataloging rules. Some of the functions include:
 * Translating common words and expressions to Norwegian ("paperback" to "heftet, "Includes bibliographic references (p. 162-189)" to "Bibliografi: side 162-189" (and much more)). Mainly from English, Swedish and German, but more translations will be included in updated versions.
-* Deleting redundant fields
+* Deleting redundant fields and subfields
+* Creating missing fields and subfields 
+* Copying information from one field or subfield to another
 * Correcting various indicators and control fields
 * Removing ISBD-punctuation
 * Other small functions not mentioned (see the code for a full overview)
@@ -34,11 +36,9 @@ For Norwegian libraries in the BIBSYS-consortia, the norms can easily be used on
    or,
 2. Open split mode in MDE, with the bibliographic record on one side, choose Rules on the other and search "UBB-hylleklare bøker". This will enable you to preview the changes before applying the norms. **Important! Do NOT change the code directly in "UBB-hylleklare bøker"**
 
+We recommend that the norms are applied to the records manually by one of these two methods (in other words, **not** used as an automatic import filter in Alma). This is because a "one record at a time"-apporach allows us to discover new field variants that require updates and improvements in the code.
+
 For libraries outside the consortia it is possible to copy the latest version from [versions](https://github.com/carinath/ubb-norcat-norms/tree/main/versions). Feel free to save a local copy and modify as needed :-)
-
- ## Suggested workflow
-
-![Suggested workflow](/images/ubb-norcat-norms_workflow.PNG?raw=true)
 
  ## Need help?
 
