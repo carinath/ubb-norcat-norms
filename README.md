@@ -36,7 +36,7 @@ For Norwegian libraries in the BIBSYS-consortia, the norms can easily be used on
    or,
 2. Open split mode in MDE, with the bibliographic record on one side, choose Rules on the other and search "UBB-hylleklare bøker". This will enable you to preview the changes before applying the norms. **Important! Do NOT change the code directly in "UBB-hylleklare bøker"**
 
-We recommend that the norms are applied to the records manually by one of these two methods (in other words, **not** used as an automatic import filter in Alma). This is because a "one record at a time"-apporach allows us to discover new field variants that require updates and improvements in the code.
+We recommend that the norms are applied to records manually by one of these two methods (in other words, **not** used as an automatic import filter in Alma). This is because a "one record at a time"-apporach allows us to discover new field variants that require updates and improvements in the code.
 
 For libraries outside the consortia it is possible to copy the latest version from [versions](https://github.com/carinath/ubb-norcat-norms/tree/main/versions). Feel free to save a local copy and modify as needed :-)
 
